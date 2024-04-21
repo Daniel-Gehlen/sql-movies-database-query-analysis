@@ -33,28 +33,29 @@ The challenge provided an opportunity to practice SQL query skills, from databas
 
 | Table Name   | Fields                                |
 |--------------|---------------------------------------|
-| Filmes       | IdFilme, Nome, Ano, Duracao           |
-| Atores       | IdAtor, PrimeiroNome, UltimoNome, Genero |
-| Generos      | IdGenero, Nome                        |
-| ElencoFilme  | IdFilme, IdAtor, Papel                |
-| FilmesGenero | IdFilme, IdGenero                     |
+| Movies       | MovieId, Name, Year, Duration         |
+| Actors       | ActorId, FirstName, LastName, Gender  |
+| Genres       | GenreId, Name                         |
+| MovieCast    | MovieId, ActorId, Role                |
+| MovieGenres  | MovieId, GenreId                      |
+
 
 ## Querys
 
-| Table Name   | Fields                                |
-|--------------|---------------------------------------|
-| Filmes       | IdFilme, Nome, Ano, Duracao           |
+| Table Name   | Fields                           |
+|--------------|----------------------------------|
+| Movies       | MovieId, Title, Year, Duration   |
 
 **1. Retrieve the name and year of the movies**
 
 ```sql
-SELECT Nome AS MovieName, Ano AS Year
+SELECT Name AS MovieName, Ano AS Year
 FROM Filmes;
 ```
 
-| Table Name   | Fields                                |
-|--------------|---------------------------------------|
-| Filmes       | IdFilme, Nome, Ano, Duracao           |
+| Table Name   | Fields                           |
+|--------------|----------------------------------|
+| Movies       | MovieId, Title, Year, Duration   |
 
 **2. Retrieve the name and year of the movies, ordered by year in ascending order**
 
@@ -64,9 +65,9 @@ FROM Filmes
 ORDER BY Ano ASC;
 ```
 
-| Table Name   | Fields                                |
-|--------------|---------------------------------------|
-| Filmes       | IdFilme, Nome, Ano, Duracao           |
+| Table Name   | Fields                           |
+|--------------|----------------------------------|
+| Movies       | MovieId, Title, Year, Duration   |
 
 **3. Retrieve the movie "Back to the Future", bringing the name, year, and duration**
 
@@ -76,9 +77,9 @@ FROM Filmes
 WHERE Nome = 'Back to the Future';
 ```
 
-| Table Name   | Fields                                |
-|--------------|---------------------------------------|
-| Filmes       | IdFilme, Nome, Ano, Duracao           |
+| Table Name   | Fields                           |
+|--------------|----------------------------------|
+| Movies       | MovieId, Title, Year, Duration   |
 
 **4. Retrieve the movies released in 1997**
 
@@ -88,9 +89,9 @@ FROM Filmes
 WHERE Ano = 1997;
 ```
 
-| Table Name   | Fields                                |
-|--------------|---------------------------------------|
-| Filmes       | IdFilme, Nome, Ano, Duracao           |
+| Table Name   | Fields                           |
+|--------------|----------------------------------|
+| Movies       | MovieId, Title, Year, Duration   |
 
 **5. Retrieve the movies released AFTER the year 2000**
 
@@ -100,9 +101,9 @@ FROM Filmes
 WHERE Ano > 2000;
 ```
 
-| Table Name   | Fields                                |
-|--------------|---------------------------------------|
-| Filmes       | IdFilme, Nome, Ano, Duracao           |
+| Table Name   | Fields                           |
+|--------------|----------------------------------|
+| Movies       | MovieId, Title, Year, Duration   |
 
 **6. Retrieve the movies with duration greater than 100 and less than 150, ordering by duration in ascending order**
 
@@ -113,9 +114,9 @@ WHERE Duracao > 100 AND Duracao < 150
 ORDER BY Duracao ASC;
 ```
 
-| Table Name   | Fields                                |
-|--------------|---------------------------------------|
-| Filmes       | IdFilme, Nome, Ano, Duracao           |
+| Table Name   | Fields                           |
+|--------------|----------------------------------|
+| Movies       | MovieId, Title, Year, Duration   |
 
 **7. Retrieve the count of movies released each year, grouped by year, ordering by year in descending order**
 
@@ -126,9 +127,9 @@ GROUP BY Ano
 ORDER BY Ano DESC;
 ```
 
-| Table Name   | Fields                                |
-|--------------|---------------------------------------|
-| Atores       | IdAtor, PrimeiroNome, UltimoNome, Genero |
+| Table Name | Fields                              |
+|------------|-------------------------------------|
+| Actors     | ActorId, FirstName, LastName, Gender|
 
 **8. Retrieve male actors, returning their FirstName, LastName**
 
@@ -138,9 +139,9 @@ FROM Atores
 WHERE Genero = 'M';
 ```
 
-| Table Name   | Fields                                |
-|--------------|---------------------------------------|
-| Atores       | IdAtor, PrimeiroNome, UltimoNome, Genero |
+| Table Name | Fields                              |
+|------------|-------------------------------------|
+| Actors     | ActorId, FirstName, LastName, Gender|
 
 **9. Retrieve female actors, returning their FirstName, LastName, and ordering by FirstName**
 
@@ -151,11 +152,11 @@ WHERE Genero = 'F'
 ORDER BY PrimeiroNome;
 ```
 
-| Table Name   | Fields                                |
-|--------------|---------------------------------------|
-| Filmes       | IdFilme, Nome, Ano, Duracao           |
-| Generos      | IdGenero, Nome                        |
-| FilmesGenero | IdFilme, IdGenero                     |
+| Table Name    | Fields                                |
+|---------------|---------------------------------------|
+| Movies        | MovieId, Title, Year, Duration       |
+| Genres        | GenreId, Name                         |
+| MoviesGenres  | MovieId, GenreId                     |
 
 **10. Retrieve the name of the movie and its genre**
 
@@ -166,11 +167,11 @@ JOIN FilmesGenero AS fg ON f.IdFilme = fg.IdFilme
 JOIN Generos AS g ON fg.IdGenero = g.IdGenero;
 ```
 
-| Table Name   | Fields                                |
-|--------------|---------------------------------------|
-| Filmes       | IdFilme, Nome, Ano, Duracao           |
-| Generos      | IdGenero, Nome                        |
-| FilmesGenero | IdFilme, IdGenero                     |
+| Table Name    | Fields                                |
+|---------------|---------------------------------------|
+| Movies        | MovieId, Title, Year, Duration       |
+| Genres        | GenreId, Name                         |
+| MoviesGenres  | MovieId, GenreId                     |
 
 **11. Retrieve the name of the movie and the genre of type "Mystery"**
 
@@ -182,11 +183,11 @@ JOIN Generos AS g ON fg.IdGenero = g.IdGenero
 WHERE g.Nome = 'Mystery';
 ```
 
-| Table Name   | Fields                                |
-|--------------|---------------------------------------|
-| Filmes       | IdFilme, Nome, Ano, Duracao           |
-| ElencoFilme  | IdFilme, IdAtor, Papel                |
-| Atores       | IdAtor, PrimeiroNome, UltimoNome      |
+| Table Name    | Fields                           |
+|---------------|----------------------------------|
+| Movies        | MovieId, Title, Year, Duration  |
+| MovieCast     | MovieId, ActorId, Role          |
+| Actors        | ActorId, FirstName, LastName    |
 
 **12. Retrieve the name of the movie and the actors, bringing their FirstName, LastName, and Role**
 
