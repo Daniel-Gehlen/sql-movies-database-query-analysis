@@ -2,43 +2,43 @@
 CREATE DATABASE IF NOT EXISTS Movies;
 USE Movies;
 
--- Create Filmes table
-CREATE TABLE IF NOT EXISTS Filmes (
-    IdFilme INT AUTO_INCREMENT PRIMARY KEY,
-    Nome VARCHAR(100),
-    Ano INT,
-    Duracao INT
+-- Create Films table
+CREATE TABLE IF NOT EXISTS Films (
+    FilmId INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(100),
+    Year INT,
+    Duration INT
 );
 
--- Create Atores table
-CREATE TABLE IF NOT EXISTS Atores (
-    IdAtor INT AUTO_INCREMENT PRIMARY KEY,
-    PrimeiroNome VARCHAR(50),
-    UltimoNome VARCHAR(50),
-    Genero ENUM('M', 'F')
+-- Create Actors table
+CREATE TABLE IF NOT EXISTS Actors (
+    ActorId INT AUTO_INCREMENT PRIMARY KEY,
+    FirstName VARCHAR(50),
+    LastName VARCHAR(50),
+    Gender ENUM('M', 'F')
 );
 
--- Create Generos table
-CREATE TABLE IF NOT EXISTS Generos (
-    IdGenero INT AUTO_INCREMENT PRIMARY KEY,
-    Nome VARCHAR(50)
+-- Create Genres table
+CREATE TABLE IF NOT EXISTS Genres (
+    GenreId INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(50)
 );
 
--- Create ElencoFilme table
-CREATE TABLE IF NOT EXISTS ElencoFilme (
-    IdFilme INT,
-    IdAtor INT,
-    Papel VARCHAR(50),
-    PRIMARY KEY (IdFilme, IdAtor),
-    FOREIGN KEY (IdFilme) REFERENCES Filmes(IdFilme),
-    FOREIGN KEY (IdAtor) REFERENCES Atores(IdAtor)
+-- Create CastFilm table
+CREATE TABLE IF NOT EXISTS CastFilm (
+    FilmId INT,
+    ActorId INT,
+    Role VARCHAR(50),
+    PRIMARY KEY (FilmId, ActorId),
+    FOREIGN KEY (FilmId) REFERENCES Films(FilmId),
+    FOREIGN KEY (ActorId) REFERENCES Actors(ActorId)
 );
 
--- Create FilmesGenero table
-CREATE TABLE IF NOT EXISTS FilmesGenero (
-    IdFilme INT,
-    IdGenero INT,
-    PRIMARY KEY (IdFilme, IdGenero),
-    FOREIGN KEY (IdFilme) REFERENCES Filmes(IdFilme),
-    FOREIGN KEY (IdGenero) REFERENCES Generos(IdGenero)
+-- Create FilmsGenre table
+CREATE TABLE IF NOT EXISTS FilmsGenre (
+    FilmId INT,
+    GenreId INT,
+    PRIMARY KEY (FilmId, GenreId),
+    FOREIGN KEY (FilmId) REFERENCES Films(FilmId),
+    FOREIGN KEY (GenreId) REFERENCES Genres(GenreId)
 );
