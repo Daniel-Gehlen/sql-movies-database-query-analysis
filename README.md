@@ -49,8 +49,8 @@ The challenge provided an opportunity to practice SQL query skills, from databas
 **1. Retrieve the name and year of the movies**
 
 ```sql
-SELECT Name AS MovieName, Ano AS Year
-FROM Filmes;
+SELECT Name AS MovieName, Year
+FROM Films;
 ```
 
 | Table Name   | Fields                           |
@@ -60,9 +60,9 @@ FROM Filmes;
 **2. Retrieve the name and year of the movies, ordered by year in ascending order**
 
 ```sql
-SELECT Nome AS MovieName, Ano AS Year
-FROM Filmes
-ORDER BY Ano ASC;
+SELECT Name AS MovieName, Year
+FROM Films
+ORDER BY Year ASC;
 ```
 
 | Table Name   | Fields                           |
@@ -72,9 +72,9 @@ ORDER BY Ano ASC;
 **3. Retrieve the movie "Back to the Future", bringing the name, year, and duration**
 
 ```sql
-SELECT Nome AS MovieName, Ano AS Year, Duracao AS Duration
-FROM Filmes
-WHERE Nome = 'Back to the Future';
+SELECT Name AS MovieName, Year, Duration
+FROM Films
+WHERE Name = 'Back to the Future';
 ```
 
 | Table Name   | Fields                           |
@@ -84,9 +84,9 @@ WHERE Nome = 'Back to the Future';
 **4. Retrieve the movies released in 1997**
 
 ```sql
-SELECT Nome AS MovieName, Ano AS Year
-FROM Filmes
-WHERE Ano = 1997;
+SELECT Name AS MovieName, Year
+FROM Films
+WHERE Year = 1997;
 ```
 
 | Table Name   | Fields                           |
@@ -96,9 +96,9 @@ WHERE Ano = 1997;
 **5. Retrieve the movies released AFTER the year 2000**
 
 ```sql
-SELECT Nome AS MovieName, Ano AS Year
-FROM Filmes
-WHERE Ano > 2000;
+SELECT Name AS MovieName, Year
+FROM Films
+WHERE Year > 2000;
 ```
 
 | Table Name   | Fields                           |
@@ -108,10 +108,10 @@ WHERE Ano > 2000;
 **6. Retrieve the movies with duration greater than 100 and less than 150, ordering by duration in ascending order**
 
 ```sql
-SELECT Nome AS MovieName, Duracao AS Duration
-FROM Filmes
-WHERE Duracao > 100 AND Duracao < 150
-ORDER BY Duracao ASC;
+SELECT Name AS MovieName, Duration
+FROM Films
+WHERE Duration > 100 AND Duration < 150
+ORDER BY Duration ASC;
 ```
 
 | Table Name   | Fields                           |
@@ -121,10 +121,10 @@ ORDER BY Duracao ASC;
 **7. Retrieve the count of movies released each year, grouped by year, ordering by year in descending order**
 
 ```sql
-SELECT Ano AS Year, COUNT(*) AS MovieCount
-FROM Filmes
-GROUP BY Ano
-ORDER BY Ano DESC;
+SELECT Year, COUNT(*) AS MovieCount
+FROM Films
+GROUP BY Year
+ORDER BY Year DESC;
 ```
 
 | Table Name | Fields                              |
@@ -134,9 +134,9 @@ ORDER BY Ano DESC;
 **8. Retrieve male actors, returning their FirstName, LastName**
 
 ```sql
-SELECT PrimeiroNome AS FirstName, UltimoNome AS LastName
-FROM Atores
-WHERE Genero = 'M';
+SELECT FirstName, LastName
+FROM Actors
+WHERE Gender = 'M';
 ```
 
 | Table Name | Fields                              |
@@ -146,10 +146,10 @@ WHERE Genero = 'M';
 **9. Retrieve female actors, returning their FirstName, LastName, and ordering by FirstName**
 
 ```sql
-SELECT PrimeiroNome AS FirstName, UltimoNome AS LastName
-FROM Atores
-WHERE Genero = 'F'
-ORDER BY PrimeiroNome;
+SELECT FirstName, LastName
+FROM Actors
+WHERE Gender = 'F'
+ORDER BY FirstName;
 ```
 
 | Table Name    | Fields                                |
@@ -161,10 +161,10 @@ ORDER BY PrimeiroNome;
 **10. Retrieve the name of the movie and its genre**
 
 ```sql
-SELECT f.Nome AS MovieName, g.Nome AS Genre
-FROM Filmes AS f
-JOIN FilmesGenero AS fg ON f.IdFilme = fg.IdFilme
-JOIN Generos AS g ON fg.IdGenero = g.IdGenero;
+SELECT f.Name AS MovieName, g.Name AS Genre
+FROM Films AS f
+JOIN FilmsGenre AS fg ON f.FilmId = fg.FilmId
+JOIN Genres AS g ON fg.GenreId = g.GenreId;
 ```
 
 | Table Name    | Fields                                |
@@ -176,11 +176,11 @@ JOIN Generos AS g ON fg.IdGenero = g.IdGenero;
 **11. Retrieve the name of the movie and the genre of type "Mystery"**
 
 ```sql
-SELECT f.Nome AS MovieName, g.Nome AS Genre
-FROM Filmes AS f
-JOIN FilmesGenero AS fg ON f.IdFilme = fg.IdFilme
-JOIN Generos AS g ON fg.IdGenero = g.IdGenero
-WHERE g.Nome = 'Mystery';
+SELECT f.Name AS MovieName, g.Name AS Genre
+FROM Films AS f
+JOIN FilmsGenre AS fg ON f.FilmId = fg.FilmId
+JOIN Genres AS g ON fg.GenreId = g.GenreId
+WHERE g.Name = 'Mystery';
 ```
 
 | Table Name    | Fields                           |
@@ -192,8 +192,8 @@ WHERE g.Nome = 'Mystery';
 **12. Retrieve the name of the movie and the actors, bringing their FirstName, LastName, and Role**
 
 ```sql
-SELECT f.Nome AS MovieName, a.PrimeiroNome AS FirstName, a.UltimoNome AS LastName, ef.Papel AS Role
-FROM Filmes AS f
-JOIN ElencoFilme AS ef ON f.IdFilme = ef.IdFilme
-JOIN Atores AS a ON ef.IdAtor = a.IdAtor;
+SELECT f.Name AS MovieName, a.FirstName, a.LastName, ef.Role
+FROM Films AS f
+JOIN CastFilm AS ef ON f.FilmId = ef.FilmId
+JOIN Actors AS a ON ef.ActorId = a.ActorId;
 ```
